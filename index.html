@@ -106,6 +106,46 @@ h2 {
 }
 
 .acceso:active {
+  .acceso-desplegable {
+  position: relative;
+}
+
+.acceso-desplegable summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.acceso-desplegable summary::-webkit-details-marker {
+  display: none;
+}
+
+.acceso-desplegable[open] {
+  border-color: #b8c9df;
+}
+
+.opciones-acceso {
+  border-top: 1px solid var(--borde);
+  margin-top: 12px;
+  padding-top: 5px;
+}
+
+.opciones-acceso a {
+  display: block;
+  text-align: left;
+  padding: 11px 5px;
+  color: var(--texto);
+  text-decoration: none;
+  font-size: 12px;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.opciones-acceso a:last-child {
+  border-bottom: 0;
+}
+
+.opciones-acceso a:active {
+  background: var(--azul-claro);
+}
   transform: scale(.97);
 }
 
@@ -286,25 +326,76 @@ footer {
   <section>
     <h2>Accesos rápidos</h2>
 
-    <div class="accesos">
-      <a class="acceso" href="#" data-enlace="reservas">
-        <span class="emoji">📅</span>
-        <strong>Reservas de espacios</strong>
-        <small>Consultar y reservar</small>
+    
+<div class="accesos">
+
+  <!-- CALENDARIO -->
+  <a class="acceso"
+     href="https://drive.google.com/file/d/12NQZXRi2GPPE0-a1orPOXWr1FmfLq-5Q/view?usp=drive_link"
+     target="_blank" rel="noopener noreferrer">
+    <span class="emoji">📅</span>
+    <strong>Calendario del centro</strong>
+    <small>Consultar fechas</small>
+  </a>
+
+  <!-- RESERVAS DE ESPACIOS -->
+  <details class="acceso acceso-desplegable">
+    <summary>
+      <span class="emoji">🏫</span>
+      <strong>Reservas de espacios</strong>
+      <small>Consultar y reservar ▾</small>
+    </summary>
+
+    <div class="opciones-acceso">
+      <a href="https://drive.google.com/file/d/18IpyPpU_IzDCb_M9ZC7P4LiMGI3ZDM5g/view?usp=drive_link"
+         target="_blank" rel="noopener noreferrer">
+        Códigos QR de reservas ↗
       </a>
 
-      <a class="acceso" href="#" data-enlace="prestamos">
-        <span class="emoji">💻</span>
-        <strong>Préstamo tecnológico</strong>
-        <small>Material y dispositivos</small>
+      <a href="https://docs.google.com/spreadsheets/d/13Z4JVFkEiAbeSunnmuudrUqDcT2XNTGGcBw8OjEwBWs/edit?usp=drive_link"
+         target="_blank" rel="noopener noreferrer">
+        Biblioteca ↗
       </a>
 
-      <a class="acceso" href="#" data-enlace="ited">
-        <span class="emoji">🛠️</span>
-        <strong>Site de ITED</strong>
-        <small>Información y recursos</small>
+      <a href="https://docs.google.com/spreadsheets/d/1ajkyYgnI-O8bdeATrGY2PuhDF2WBfWOt_mMCZNf3KvI/edit?usp=drive_link"
+         target="_blank" rel="noopener noreferrer">
+        Sala de usos múltiples ↗
+      </a>
+
+      <a href="https://docs.google.com/spreadsheets/d/1im4t0eQXTmMjOosP2LJ23hWdhJgpRuG8Th9VPR8kTLM/edit?usp=drive_link"
+         target="_blank" rel="noopener noreferrer">
+        Infolaboratorio ↗
+      </a>
+
+      <a href="#" data-enlace="cuadrantes">
+        Cuadrantes semanales ↗
       </a>
     </div>
+  </details>
+
+  <!-- PRÉSTAMO TECNOLÓGICO -->
+  <details class="acceso acceso-desplegable">
+    <summary>
+      <span class="emoji">💻</span>
+      <strong>Préstamo tecnológico</strong>
+      <small>Material y dispositivos ▾</small>
+    </summary>
+
+    <div class="opciones-acceso">
+      <a href="https://sites.google.com/educarex.es/espacio-del-profesorado/reservar-dispositivos/pr%C3%A9stamos-dispositivos-tecnol%C3%B3gicos?authuser=0"
+         target="_blank" rel="noopener noreferrer">
+        Préstamo de dispositivos tecnológicos ↗
+      </a>
+
+      <a href="https://sites.google.com/educarex.es/espacio-del-profesorado/reservar-dispositivos/pr%C3%A9stamos-material-c%C3%B3digo-escuela-4-0?authuser=0"
+         target="_blank" rel="noopener noreferrer">
+        Préstamo de material Código Escuela 4.0 ↗
+      </a>
+    </div>
+  </details>
+
+</div>
+
   </section>
 
   <section>
@@ -321,13 +412,26 @@ footer {
           </span>
           <span class="flecha">›</span>
         </button>
-        <div class="enlaces">
-          <a class="enlace" href="#" data-enlace="actas-ccp">Actas CCP <span>↗</span></a>
-          <a class="enlace" href="#" data-enlace="ausencias">Ausencias y permisos <span>↗</span></a>
-          <a class="enlace" href="#" data-enlace="cuadrantes">Cuadrantes semanales <span>↗</span></a>
-          <a class="enlace" href="#" data-enlace="guardias">Guardias <span>↗</span></a>
-          <a class="enlace" href="https://drive.google.com/drive/u/0/folders/15n1aPmi7-WIFkyG8RqqEG5oqVGbDuAYS" target="_blank" rel="noopener noreferrer">Inicio de curso <span>↗</span></a>
-        </div>
+        
+<div class="enlaces">
+  <a class="enlace" href="https://drive.google.com/drive/u/0/folders/15n1aPmi7-WIFkyG8RqqEG5oqVGbDuAYS"
+     target="_blank" rel="noopener noreferrer">
+    Inicio de curso <span>↗</span>
+  </a>
+
+  <a class="enlace" href="#" data-enlace="ausencias">
+    Ausencias y permisos <span>↗</span>
+  </a>
+
+  <a class="enlace" href="#" data-enlace="guardias">
+    Guardias <span>↗</span>
+  </a>
+
+  <a class="enlace" href="#" data-enlace="actas-ccp">
+    Actas CCP <span>↗</span>
+  </a>
+</div>
+
       </div>
 
       <div class="categoria">
@@ -380,14 +484,25 @@ footer {
         <button class="categoria-boton" aria-expanded="false">
           <span class="categoria-icono" style="background:#e5f4f5">📁</span>
           <span class="categoria-info">
-            <strong>Recursos y espacios</strong>
-            <small>Material gráfico y recursos compartidos</small>
+            <strong>Recursos del centro y formación digital</strong>
+            <small>Material compartido, herramientas y formación docente</small>
           </span>
           <span class="flecha">›</span>
         </button>
         <div class="enlaces">
-          <a class="enlace" href="#" data-enlace="logotipos">Logotipos <span>↗</span></a>
-        </div>
+  <a class="enlace" href="#" data-enlace="logotipos">
+    Logotipos <span>↗</span>
+  </a>
+
+  <a class="enlace" href="#" data-enlace="ited">
+    Site de ITED <span>↗</span>
+  </a>
+
+  <a class="enlace" href="https://rfp.educarex.es"
+     target="_blank" rel="noopener noreferrer">
+    Registro de Formación del Profesorado (RFP) <span>↗</span>
+  </a>
+</div>
       </div>
 
     </div>
