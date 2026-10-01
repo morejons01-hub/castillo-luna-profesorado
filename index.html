@@ -2,12 +2,417 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castillo de Luna</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#263b59">
+<title>Castillo de Luna | Profesorado</title>
+
+<style>
+:root {
+  --azul: #263b59;
+  --azul-claro: #eaf2ff;
+  --fondo: #f4f6f9;
+  --texto: #263445;
+  --secundario: #64748b;
+  --blanco: #ffffff;
+  --borde: #e5eaf0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+header {
+  background: var(--azul);
+  color: white;
+  padding: 28px 20px 32px;
+  border-radius: 0 0 24px 24px;
+}
+
+.cabecera {
+  max-width: 850px;
+  margin: auto;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icono-centro {
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  background: rgba(255,255,255,.15);
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+}
+
+h1 {
+  font-size: 23px;
+  margin: 0 0 5px;
+}
+
+.subtitulo {
+  font-size: 14px;
+  color: #dbe5f1;
+  margin: 0;
+}
+
+.bienvenida {
+  margin-top: 23px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #f1f5f9;
+}
+
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 22px 16px 45px;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+
+.accesos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.acceso {
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 17px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--texto);
+  box-shadow: 0 2px 6px rgba(20,40,70,.04);
+  transition: transform .15s;
+}
+
+.acceso:active {
+  transform: scale(.97);
+}
+
+.acceso .emoji {
+  font-size: 27px;
+  display: block;
+  margin-bottom: 9px;
+}
+
+.acceso strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.acceso small {
+  display: block;
+  color: var(--secundario);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.seccion-titulo {
+  margin-bottom: 14px;
+}
+
+.categorias {
+  display: grid;
+  gap: 11px;
+}
+
+.categoria {
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(20,40,70,.035);
+}
+
+.categoria-boton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 0;
+  background: white;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--texto);
+}
+
+.categoria-icono {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.categoria-info {
+  flex: 1;
+}
+
+.categoria-info strong {
+  font-size: 14px;
+  display: block;
+}
+
+.categoria-info small {
+  color: var(--secundario);
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
+}
+
+.flecha {
+  color: #94a3b8;
+  font-size: 19px;
+  transition: transform .2s;
+}
+
+.categoria.abierta .flecha {
+  transform: rotate(90deg);
+}
+
+.enlaces {
+  display: none;
+  padding: 0 14px 12px 72px;
+}
+
+.categoria.abierta .enlaces {
+  display: block;
+}
+
+.enlace {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 4px;
+  border-top: 1px solid #eef1f5;
+  color: var(--texto);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.enlace span:last-child {
+  color: #94a3b8;
+  font-size: 17px;
+}
+
+.nota {
+  text-align: center;
+  color: var(--secundario);
+  font-size: 12px;
+  margin-top: 28px;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  padding: 18px;
+  color: var(--secundario);
+  font-size: 11px;
+}
+
+@media (min-width: 600px) {
+  header {
+    padding: 36px 28px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  main {
+    padding: 30px 24px 50px;
+  }
+
+  .acceso {
+    padding: 22px 14px;
+  }
+
+  .acceso strong {
+    font-size: 14px;
+  }
+
+  .categoria-boton {
+    padding: 18px;
+  }
+}
+</style>
 </head>
+
 <body>
-    <h1>IES Castillo de Luna</h1>
-    <p>Aplicación del profesorado en construcción.</p>
+
+<header>
+  <div class="cabecera">
+    <div class="marca">
+      <div class="icono-centro">🏰</div>
+      <div>
+        <h1>Castillo de Luna</h1>
+        <p class="subtitulo">Espacio del profesorado</p>
+      </div>
+    </div>
+    <p class="bienvenida">
+      Bienvenido al espacio de acceso rápido a los documentos,
+      herramientas y recursos del centro.
+    </p>
+  </div>
+</header>
+
+<main>
+
+  <section>
+    <h2>Accesos rápidos</h2>
+
+    <div class="accesos">
+      <a class="acceso" href="#" data-enlace="reservas">
+        <span class="emoji">📅</span>
+        <strong>Reservas de espacios</strong>
+        <small>Consultar y reservar</small>
+      </a>
+
+      <a class="acceso" href="#" data-enlace="prestamos">
+        <span class="emoji">💻</span>
+        <strong>Préstamo tecnológico</strong>
+        <small>Material y dispositivos</small>
+      </a>
+
+      <a class="acceso" href="#" data-enlace="ited">
+        <span class="emoji">🛠️</span>
+        <strong>Site de ITED</strong>
+        <small>Información y recursos</small>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="seccion-titulo">Documentación y recursos</h2>
+
+    <div class="categorias">
+
+      <div class="categoria">
+        <button class="categoria-boton" aria-expanded="false">
+          <span class="categoria-icono" style="background:#eaf2ff">📋</span>
+          <span class="categoria-info">
+            <strong>Organización del centro</strong>
+            <small>Gestión y funcionamiento diario</small>
+          </span>
+          <span class="flecha">›</span>
+        </button>
+        <div class="enlaces">
+          <a class="enlace" href="#" data-enlace="actas-ccp">Actas CCP <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="ausencias">Ausencias y permisos <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="cuadrantes">Cuadrantes semanales <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="guardias">Guardias <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="inicio-curso">Inicio de curso <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <button class="categoria-boton" aria-expanded="false">
+          <span class="categoria-icono" style="background:#e8f5ed">🤝</span>
+          <span class="categoria-info">
+            <strong>Convivencia y actividades</strong>
+            <small>Convivencia escolar y actividades complementarias</small>
+          </span>
+          <span class="flecha">›</span>
+        </button>
+        <div class="enlaces">
+          <a class="enlace" href="#" data-enlace="disciplina">Disciplina y convivencia <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="extraescolares">Extraescolares <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <button class="categoria-boton" aria-expanded="false">
+          <span class="categoria-icono" style="background:#fff1e5">🎓</span>
+          <span class="categoria-info">
+            <strong>Evaluación y seguimiento</strong>
+            <small>Documentos de evaluación y alumnado</small>
+          </span>
+          <span class="flecha">›</span>
+        </button>
+        <div class="enlaces">
+          <a class="enlace" href="#" data-enlace="modelos-actas">Modelos de actas de evaluación <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="pendientes">Pendientes <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <button class="categoria-boton" aria-expanded="false">
+          <span class="categoria-icono" style="background:#f2eaff">🛡️</span>
+          <span class="categoria-info">
+            <strong>Normativa y protección</strong>
+            <small>Documentación oficial y procedimientos</small>
+          </span>
+          <span class="flecha">›</span>
+        </button>
+        <div class="enlaces">
+          <a class="enlace" href="#" data-enlace="documentacion-oficial">Documentación oficial <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="moviles">Móviles <span>↗</span></a>
+          <a class="enlace" href="#" data-enlace="proteccion-datos">Protección de datos y RRSS <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="categoria">
+        <button class="categoria-boton" aria-expanded="false">
+          <span class="categoria-icono" style="background:#e5f4f5">📁</span>
+          <span class="categoria-info">
+            <strong>Recursos y espacios</strong>
+            <small>Material gráfico y recursos compartidos</small>
+          </span>
+          <span class="flecha">›</span>
+        </button>
+        <div class="enlaces">
+          <a class="enlace" href="#" data-enlace="logotipos">Logotipos <span>↗</span></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="nota">
+    Los documentos y herramientas se abrirán desde sus ubicaciones originales.
+    El acceso dependerá de los permisos de cada recurso.
+  </p>
+
+</main>
+
+<footer>
+  IES Castillo de Luna · Alburquerque
+</footer>
+
+<script>
+document.querySelectorAll(".categoria-boton").forEach(boton => {
+  boton.addEventListener("click", () => {
+    const categoria = boton.parentElement;
+    const abierta = categoria.classList.toggle("abierta");
+    boton.setAttribute("aria-expanded", abierta);
+  });
+});
+</script>
+
 </body>
 </html>
