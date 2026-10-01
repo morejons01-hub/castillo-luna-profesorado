@@ -86,12 +86,14 @@ h2 {
   margin: 0 0 14px;
 }
 
+
 .accesos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 12px;
   margin-bottom: 30px;
 }
+
 
 .acceso {
   background: white;
@@ -105,9 +107,16 @@ h2 {
   transition: transform .15s;
 }
 
+
 .acceso:active {
-  .acceso-desplegable {
+  transform: scale(.97);
+}
+
+/* Desplegables de los accesos rápidos */
+.acceso-desplegable {
   position: relative;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .acceso-desplegable summary {
@@ -121,22 +130,39 @@ h2 {
 
 .acceso-desplegable[open] {
   border-color: #b8c9df;
+  z-index: 100;
 }
 
 .opciones-acceso {
-  border-top: 1px solid var(--borde);
-  margin-top: 12px;
-  padding-top: 5px;
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  min-width: 220px;
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(20,40,70,.16);
+  padding: 6px 12px;
+  z-index: 200;
+  text-align: left;
+}
+
+.acceso-desplegable[open] .opciones-acceso {
+  display: block;
 }
 
 .opciones-acceso a {
   display: block;
   text-align: left;
-  padding: 11px 5px;
+  padding: 13px 5px;
   color: var(--texto);
   text-decoration: none;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.4;
   border-bottom: 1px solid #eef1f5;
+  white-space: normal;
 }
 
 .opciones-acceso a:last-child {
@@ -146,10 +172,8 @@ h2 {
 .opciones-acceso a:active {
   background: var(--azul-claro);
 }
-  transform: scale(.97);
-}
 
-.acceso .emoji {
+  .acceso .emoji {
   font-size: 27px;
   display: block;
   margin-bottom: 9px;
@@ -295,7 +319,13 @@ footer {
   .acceso strong {
     font-size: 14px;
   }
+.accesos {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
+.acceso-desplegable[open] {
+  z-index: 100;
+}
   .categoria-boton {
     padding: 18px;
   }
