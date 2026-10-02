@@ -48,15 +48,23 @@ header {
 }
 
 .icono-centro {
-  width: 52px;
-  height: 52px;
-  border-radius: 15px;
-  background: rgba(255,255,255,.15);
-  display: grid;
-  place-items: center;
-  font-size: 27px;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
 }
 
+.logo-centro {
+  display: block;
+  max-width: 60px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
 h1 {
   font-size: 23px;
   margin: 0 0 5px;
@@ -323,12 +331,7 @@ footer {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-  .logo-centro {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  vertical-align: middle;
-}
+
 .acceso-desplegable[open] {
   z-index: 100;
 }
