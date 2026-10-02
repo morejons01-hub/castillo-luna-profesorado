@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#263b59">
+<meta name="theme-color" content="#751638">
+<link rel="manifest" href="./manifest.json">
 <title>Castillo de Luna | Profesorado</title>
 
 <style>
@@ -778,6 +779,13 @@ document.querySelectorAll(".categoria-boton").forEach(boton => {
   });
 });
 </script>
-
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .catch(error => console.error("Error al registrar la aplicación:", error));
+  });
+}
+</script>
 </body>
 </html>
