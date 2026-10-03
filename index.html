@@ -310,6 +310,36 @@ footer {
   font-size: 11px;
 }
 
+
+/* Buscador general */
+.busqueda { margin: 0 0 26px; }
+.busqueda-caja {
+  display:flex; align-items:center; gap:10px; background:#fff;
+  border:1px solid var(--borde); border-radius:14px; padding:0 15px;
+  box-shadow:0 2px 6px rgba(20,40,70,.04);
+}
+.busqueda-caja span { font-size:20px; color:var(--secundario); }
+.busqueda-caja input {
+  width:100%; min-width:0; border:0; outline:0; background:transparent;
+  padding:16px 0; color:var(--texto); font:inherit; font-size:14px;
+}
+.resultados-busqueda {
+  display:none; margin-top:10px; background:#fff; border:1px solid var(--borde);
+  border-radius:14px; overflow:hidden;
+}
+.resultados-busqueda.visible { display:block; }
+.resultado-busqueda {
+  display:block; padding:13px 15px; color:var(--texto); text-decoration:none;
+  border-bottom:1px solid #eef1f5;
+}
+.resultado-busqueda:last-child { border-bottom:0; }
+.resultado-busqueda strong { display:block; font-size:14px; }
+.resultado-busqueda small {
+  display:block; color:var(--secundario); font-size:12px;
+  margin-top:4px; line-height:1.4;
+}
+.resultado-vacio { padding:15px; color:var(--secundario); font-size:13px; }
+
 @media (min-width: 600px) {
   header {
     padding: 36px 28px;
@@ -371,6 +401,14 @@ footer {
 
 <main>
 
+  <section class="busqueda" aria-label="Buscador de recursos">
+    <div class="busqueda-caja">
+      <span aria-hidden="true">⌕</span>
+      <input id="buscador" type="search" placeholder="Buscar documentos, reservas y recursos..." aria-label="Buscar en el Espacio del profesorado" autocomplete="off">
+    </div>
+    <div id="resultados-busqueda" class="resultados-busqueda" aria-live="polite"></div>
+  </section>
+
   <section>
     <h2>Accesos rápidos</h2>
 
@@ -395,11 +433,6 @@ footer {
     </summary>
 
     <div class="opciones-acceso">
-      <a href="https://drive.google.com/file/d/18IpyPpU_IzDCb_M9ZC7P4LiMGI3ZDM5g/view?usp=drive_link"
-         target="_blank" rel="noopener noreferrer">
-        Códigos QR de reservas ↗
-      </a>
-
       <a href="https://docs.google.com/spreadsheets/d/13Z4JVFkEiAbeSunnmuudrUqDcT2XNTGGcBw8OjEwBWs/edit?usp=drive_link"
          target="_blank" rel="noopener noreferrer">
         Biblioteca ↗
@@ -728,7 +761,7 @@ footer {
     <span class="categoria-icono" style="background:#e5f4f5">📁</span>
     <span class="categoria-info">
       <strong>Recursos del centro y formación digital</strong>
-      <small>Material compartido, herramientas y formación docente</small>
+      <small>Logotipos y accesos de interés para el profesorado</small>
     </span>
     <span class="flecha">›</span>
   </button>
@@ -738,7 +771,7 @@ footer {
       Logotipos <span>↗</span>
     </a>
 
-    <a class="enlace" href="https://sites.google.com/educarex.es/ited-iescastillodeluna/inicio" target="_blank" rel="noopener noreferrer">
+    <a class="enlace" href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fsites.google.com%2Feducarex.es%2Fited-iescastillodeluna%2Finicio" target="_blank" rel="noopener noreferrer">
       Site de ITED <span>↗</span>
     </a>
 
@@ -769,6 +802,64 @@ footer {
 <footer>
   IES Castillo de Luna · Alburquerque
 </footer>
+
+<script>
+(() => {
+  const buscador = document.getElementById("buscador");
+  const contenedor = document.getElementById("resultados-busqueda");
+  const recursos = Array.from(document.querySelectorAll("a[href]"))
+    .map(enlace => {
+      const titulo = enlace.innerText.replace(/↗/g, "").trim();
+      const categorias = [];
+      let nodo = enlace.parentElement;
+      while (nodo) {
+        if (nodo.classList && nodo.classList.contains("categoria")) {
+          const nombre = nodo.querySelector(":scope > .categoria-boton .categoria-info strong");
+          const descripcion = nodo.querySelector(":scope > .categoria-boton .categoria-info small");
+          if (nombre) categorias.unshift(nombre.innerText.trim());
+          if (descripcion) categorias.unshift(descripcion.innerText.trim());
+        }
+        nodo = nodo.parentElement;
+      }
+      const contexto = categorias.join(" · ");
+      return { titulo, contexto, texto: (titulo + " " + contexto).toLocaleLowerCase("es"), url: enlace.href };
+    }).filter(recurso => recurso.titulo);
+
+  buscador.addEventListener("input", () => {
+    const consulta = buscador.value.trim().toLocaleLowerCase("es");
+    contenedor.replaceChildren();
+    if (!consulta) { contenedor.classList.remove("visible"); return; }
+    const palabras = consulta.split(/\\s+/).filter(Boolean);
+    const coincidencias = recursos.filter(recurso =>
+      palabras.every(palabra => recurso.texto.includes(palabra))
+    ).slice(0, 20);
+    contenedor.classList.add("visible");
+    if (!coincidencias.length) {
+      const vacio = document.createElement("div");
+      vacio.className = "resultado-vacio";
+      vacio.textContent = "No se han encontrado recursos.";
+      contenedor.appendChild(vacio);
+      return;
+    }
+    coincidencias.forEach(recurso => {
+      const resultado = document.createElement("a");
+      resultado.className = "resultado-busqueda";
+      resultado.href = recurso.url;
+      resultado.target = "_blank";
+      resultado.rel = "noopener noreferrer";
+      const titulo = document.createElement("strong");
+      titulo.textContent = recurso.titulo;
+      resultado.appendChild(titulo);
+      if (recurso.contexto) {
+        const detalle = document.createElement("small");
+        detalle.textContent = recurso.contexto;
+        resultado.appendChild(detalle);
+      }
+      contenedor.appendChild(resultado);
+    });
+  });
+})();
+</script>
 
 <script>
 document.querySelectorAll(".categoria-boton").forEach(boton => {
