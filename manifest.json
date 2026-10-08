@@ -1,7 +1,7 @@
 
 {
   "name": "IES Castillo de Luna - Espacio del profesorado",
-  "short_name": "Profesorado",
+  "short_name": "IES Castillo de Luna",
   "description": "Acceso rápido a documentos, herramientas y recursos del IES Castillo de Luna.",
   "start_url": "./",
   "scope": "./",
